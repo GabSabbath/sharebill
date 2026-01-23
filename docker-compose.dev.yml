@@ -1,0 +1,19 @@
+name: model
+services:
+  node:
+    build:
+      dockerfile: docker/dev/node.dockerfile
+    image: node:24-alpine
+    user: "${UID}:${GID}"
+    volumes:
+      - .:/usr/src/app
+
+  plantuml-server:
+    image: plantuml/plantuml-server:jetty
+    ports:
+      - ${PLANTUML_PORT}:8080
+
+  plantuml-converter:
+    image: plantuml/plantuml
+    volumes:
+      - ./doc/models:/models
