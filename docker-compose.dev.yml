@@ -4,7 +4,7 @@ services:
     build:
       dockerfile: docker/dev/node.dockerfile
     image: node:24-alpine
-    user: "${UID}:${GID}"
+    user: "${DEV_USER_ID}:${DEV_GROUP_ID}"
     volumes:
       - .:/usr/src/app
 
