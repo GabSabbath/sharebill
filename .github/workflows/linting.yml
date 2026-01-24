@@ -17,5 +17,14 @@ jobs:
       - name: dev setup
         run: make setup
 
+      - name: npm install
+        run: docker compose exec -T php npm install
+
       - name: Run Prettier check
-        run: docker compose run --rm node npx prettier --check .
+        run: docker compose exec php npx prettier --check .
+
+      - name: Pint
+        run: docker compose exec php ./vendor/bin/pint
+
+      - name: Eslint
+        run: docker compose exec php npx eslint .
