@@ -1,0 +1,21 @@
+name: Linting
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: dev setup
+        run: make setup
+
+      - name: Run Prettier check
+        run: docker compose run --rm node npx prettier --check .

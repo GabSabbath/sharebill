@@ -4,6 +4,8 @@ services:
     build:
       dockerfile: docker/dev/node.dockerfile
     image: node:24-alpine
+    environment:
+      NPM_CONFIG_CACHE: /usr/src/app/.npm-cache
     user: "${DEV_USER_ID}:${DEV_GROUP_ID}"
     volumes:
       - .:/usr/src/app

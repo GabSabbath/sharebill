@@ -1,1 +1,1 @@
-docker compose run -T node npx pretty-quick
+docker compose run --rm -T node npx pretty-quick

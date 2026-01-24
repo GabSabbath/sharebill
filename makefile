@@ -6,7 +6,7 @@ setup: ## Setup dev environment
 	./docker/setup.sh
 
 npm-install: ## npm install
-	docker compose run node npm install
+	docker compose run --rm node npm install
 
 destroy: ## Destroy and purge all dev environment 
 	docker compose -f docker-compose.dev.yml down --rmi all --volumes
@@ -27,4 +27,4 @@ ssh-add-key: ## Unlock your ssh key so you enter your password all the time
 	ssh-add
 
 prettier: ## Run prettier on the entire project
-	docker compose run node npx prettier --write .
+	docker compose run --rm node npx prettier --write .
