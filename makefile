@@ -30,7 +30,7 @@ stop: ## Stop containers
 	docker compose stop
 
 puml-generate: ## Generate the `svg` files from `/models/*.puml`
-	docker compose run --rm -T plantuml-converter  --svg '/models/*.puml'
+	docker compose run --rm -T plantuml-converter --svg '/doc/**/*.puml'
 
 ssh-add-key: ## Unlock your ssh key so you enter your password all the time
 	eval `ssh-agent`
