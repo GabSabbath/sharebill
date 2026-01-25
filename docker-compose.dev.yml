@@ -1,0 +1,32 @@
+name: model
+services:
+  php:
+    build:
+      dockerfile: docker/dev/php.dockerfile
+    user: '${DEV_USER_ID}:${DEV_GROUP_ID}'
+    volumes:
+      - .:/usr/src/app
+    environment:
+      NPM_CONFIG_CACHE: /usr/src/app/.npm-cache
+    ports:
+      - '5173:5173' # for Vite dev server
+      - '${APP_PORT}:8000' # for PHP app (artisan serve or similar)
+    #command: >
+    #sh -c "
+    #composer install &&
+    #php artisan key:generate &&
+    #php artisan migrate --force &&
+    #npm install &&
+    #npm run dev &
+    #php artisan serve --host=0.0.0.0 --port=8000
+    #"
+
+  plantuml-server:
+    image: plantuml/plantuml-server:jetty
+    ports:
+      - ${PLANTUML_PORT}:8080
+
+  plantuml-converter:
+    image: plantuml/plantuml
+    volumes:
+      - ./doc/models:/models
