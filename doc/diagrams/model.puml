@@ -1,0 +1,30 @@
+@startuml
+!theme mono
+skinparam monochrome reverse
+
+class Category 
+
+class Home
+
+class User 
+
+abstract class ATransaction {
+    - isSettled() : boolean
+    - getAmount()
+}
+
+class SimpleTransaction extends ATransaction {
+    - isSettled() : boolean 
+}
+
+class Split extends ATransaction { 
+    - override isSettled() : boolean 
+}
+
+ATransaction "*" --> "1" User
+ATransaction "1" --> "1" Category
+User "*" --> "1" Home
+Category "*" <-- "1" Home
+SimpleTransaction "1" --> "*" Split
+
+@enduml
