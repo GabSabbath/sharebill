@@ -3,6 +3,12 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Home;
+use App\Models\Category;
+use App\Models\User;
+use App\Models\Transaction;
+use App\Models\SimpleTransaction;
+use App\Models\SplitTransaction;
 
 return new class extends Migration
 {
@@ -11,9 +17,14 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::table('users', function (Blueprint $table){
+            $table->foreignIdFor(Home::class);
+        });
+
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignIdFor(Home::class);
         });
 
         Schema::create('homes', function (Blueprint $table) {
@@ -24,16 +35,20 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignIdFor(Category::class);
+            $table->foreignIdFor(User::class);
         });
-        
+
         Schema::create('simple_transactions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->morphs(Transaction::class);
         });
 
         Schema::create('split_transactions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->morphs(Transaction::class);
         });
     }
 
@@ -44,8 +59,8 @@ return new class extends Migration
     {
         Schema::dropIfExists('categories');
         Schema::dropIfExists('homes');
-        Schema::dropIfExists('transactions');
         Schema::dropIfExists('simpletransactions');
         Schema::dropIfExists('split_transactions');
+        Schema::dropIfExists('transactions');
     }
 };

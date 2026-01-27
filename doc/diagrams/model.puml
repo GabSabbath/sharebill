@@ -8,23 +8,23 @@ class Home
 
 class User 
 
-abstract class ATransaction {
+abstract class Transaction {
     - isSettled() : boolean
     - getAmount()
 }
 
-class SimpleTransaction extends ATransaction {
+class SimpleTransaction extends Transaction {
     - isSettled() : boolean 
 }
 
-class Split extends ATransaction { 
+class SplitTransaction extends Transaction { 
     - override isSettled() : boolean 
 }
 
-ATransaction "*" --> "1" User
-ATransaction "1" --> "1" Category
+Transaction "*" --> "1" User
+Transaction "1" --> "1" Category
 User "*" --> "1" Home
-Category "*" <-- "1" Home
-SimpleTransaction "1" --> "*" Split
+Category "*" --> "1" Home
+Transaction "1" --> "*" SimpleTransaction
 
 @enduml
