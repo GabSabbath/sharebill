@@ -18,21 +18,23 @@ abstract class Transaction {
     - date : DateTime
     - name : string
     - comment : string
-    - originalAmount : number
     - getAmount()
 }
 
-note right of Transaction::originalAmount {
+note right of Transaction::getAmount {
     - negative value means money going out of the payer's account
     - positive value means money comming in to the payer's account
 }
 
 class SimpleTransaction extends Transaction {
     - isSettled() : boolean 
+    - originalAmount : number
+    - amount : number
 }
 
 class SplitTransaction extends Transaction { 
     - override isSettled() : boolean 
+    - amount : number
 }
 
 class Settlement {

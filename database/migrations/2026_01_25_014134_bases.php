@@ -18,48 +18,53 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->foreignIdFor(Home::class);
+            $table->softDeletes();
         });
 
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+            $table->text('name');
+            $table->enum('type', ['need', 'want', 'investment']);
+
             $table->foreignIdFor(Home::class);
         });
 
         Schema::create('homes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->uuid();
         });
 
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->softDeletes();
+
             $table->foreignIdFor(Category::class);
             $table->foreignIdFor(User::class);
-        });
-
-        Schema::create('simple_transactions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->morphs(Transaction::class);
 
             $table->date('date');
             $table->text('name');
             $table->text('comment')->nullable();
         });
 
+        Schema::create('simple_transactions', function (Blueprint $table) {
+            $table->id();
+            $table->morphs(Transaction::class);
+            $table->float('original_amount', 2);
+        });
+
         Schema::create('split_transactions', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->morphs(Transaction::class);
             // Transaction that this Split contributes to
             $table->foreignIdFor(Settlement::class);
             $table->foreignId('original_transaction')->constrained('transactions');
+
+            $table->float('amount', 2);
         });
 
         Schema::create('settlements', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->date('date');
         });
     }
 
