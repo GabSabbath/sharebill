@@ -4,6 +4,7 @@ use App\Models\Category;
 use App\Models\Home;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\Settlement;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -50,9 +51,9 @@ return new class extends Migration
         Schema::create('split_transactions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->dateTime('settled_date')->comment('Moment at which this transaction was settled. In other words, when was this split value transferred to the original payer.');
             $table->morphs(Transaction::class);
             // Transaction that this Split contributes to
+            $table->foreignIdFor(Settlement::class);
             $table->foreignId('original_transaction')->constrained('transactions');
         });
 

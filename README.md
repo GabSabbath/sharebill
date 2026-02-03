@@ -11,6 +11,10 @@
     - Prettier for formatting most files
 - Make: for simplifying commands. _`make setup` and `make destroy` are your best friends_
 
+# Model
+
+![model diagram](doc/diagrams/model.svg)
+
 # Documentation
 
 PlantUML is used for generating diagrams. See makefile and
