@@ -41,12 +41,24 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->morphs(Transaction::class);
+
+            $table->date('date');
+            $table->text('name');
+            $table->text('comment')->nullable();
         });
 
         Schema::create('split_transactions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->dateTime('settled_date')->comment('Moment at which this transaction was settled. In other words, when was this split value transferred to the original payer.');
             $table->morphs(Transaction::class);
+            // Transaction that this Split contributes to
+            $table->foreignId('original_transaction')->constrained('transactions');
+        });
+
+        Schema::create('settlements', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -60,5 +72,6 @@ return new class extends Migration
         Schema::dropIfExists('simpletransactions');
         Schema::dropIfExists('split_transactions');
         Schema::dropIfExists('transactions');
+        Schema::dropIfExists('settliments');
     }
 };

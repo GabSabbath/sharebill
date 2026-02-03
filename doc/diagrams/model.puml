@@ -2,15 +2,29 @@
 !theme mono
 skinparam monochrome reverse
 
-class Category 
+class Category {
+    - name 
+    - type : 'need' | 'want' | 'investment'
+}
 
-class Home
+class Home {
+    - uuid
+}
 
 class User 
 
 abstract class Transaction {
     - isSettled() : boolean
+    - date : DateTime
+    - name : string
+    - comment : string
+    - originalAmount : number
     - getAmount()
+}
+
+note right of Transaction::originalAmount {
+    - negative value means money going out of the payer's account
+    - positive value means money comming in to the payer's account
 }
 
 class SimpleTransaction extends Transaction {
@@ -21,10 +35,15 @@ class SplitTransaction extends Transaction {
     - override isSettled() : boolean 
 }
 
+class Settlement {
+    date : DateTime
+}
+
 Transaction "*" --> "1" User
 Transaction "1" --> "1" Category
 User "*" --> "1" Home
 Category "*" --> "1" Home
-Transaction "1" --> "*" SimpleTransaction
+SplitTransaction "*" --> "1" SimpleTransaction : balances
+SplitTransaction "*" --> "1" Settlement
 
 @enduml
