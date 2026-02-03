@@ -57,7 +57,7 @@ return new class extends Migration
             $table->morphs(Transaction::class);
             // Transaction that this Split contributes to
             $table->foreignIdFor(Settlement::class);
-            $table->foreignId('original_transaction')->constrained('transactions');
+            $table->foreignId('original_transaction')->constrained('simple_transactions');
 
             $table->float('amount', 2);
         });
@@ -78,6 +78,6 @@ return new class extends Migration
         Schema::dropIfExists('simpletransactions');
         Schema::dropIfExists('split_transactions');
         Schema::dropIfExists('transactions');
-        Schema::dropIfExists('settliments');
+        Schema::dropIfExists('settlements');
     }
 };
