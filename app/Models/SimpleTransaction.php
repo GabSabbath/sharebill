@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class SimpleTransaction extends Model
 {
-    protected $fillable = [ 'amount'];
+    protected $fillable = ['amount'];
 }

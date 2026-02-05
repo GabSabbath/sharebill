@@ -9,6 +9,6 @@ abstract class Transaction extends Model
     protected $fillable = [
         'date',
         'name',
-        'comment'
+        'comment',
     ];
 }
