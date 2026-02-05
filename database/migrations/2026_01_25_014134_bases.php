@@ -18,7 +18,7 @@ return new class extends Migration
     {
         // Users
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignIdFor(Home::class);
+            $table->foreignIdFor(Home::class)->nullable();
             $table->softDeletes();
 
             $table->text('color')->comment('in hexcode, including the #');
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->text('name');
             $table->enum('type', ['need', 'want', 'investment']);
 
-            $table->text('color')->comment('in hexcode, including the #');
+            $table->text('color')->comment('in hexcode, including the #')->nullable();
             $table->foreignIdFor(Home::class);
         });
 
