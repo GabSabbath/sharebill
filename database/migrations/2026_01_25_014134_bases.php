@@ -74,6 +74,9 @@ return new class extends Migration
         // Settlements
         Schema::create('settlements', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('Sender')->constrained('users');
+            $table->foreignId('Receiver')->constrained('users');
+
             $table->date('date');
         });
     }
