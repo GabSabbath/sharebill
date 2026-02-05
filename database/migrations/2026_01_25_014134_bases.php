@@ -16,24 +16,31 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Users
         Schema::table('users', function (Blueprint $table) {
             $table->foreignIdFor(Home::class);
             $table->softDeletes();
+
+            $table->text('color')->comment('in hexcode, including the #');
         });
 
+        // Categories
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
 
             $table->text('name');
             $table->enum('type', ['need', 'want', 'investment']);
 
+            $table->text('color')->comment('in hexcode, including the #');
             $table->foreignIdFor(Home::class);
         });
 
+        // Homes
         Schema::create('homes', function (Blueprint $table) {
             $table->uuid();
         });
 
+        // Transactions
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->softDeletes();
@@ -46,12 +53,14 @@ return new class extends Migration
             $table->text('comment')->nullable();
         });
 
+        // SimpleTransactions
         Schema::create('simple_transactions', function (Blueprint $table) {
             $table->id();
             $table->morphs(Transaction::class);
             $table->float('original_amount', 2);
         });
 
+        // SplitTransactions
         Schema::create('split_transactions', function (Blueprint $table) {
             $table->id();
             $table->morphs(Transaction::class);
@@ -62,6 +71,7 @@ return new class extends Migration
             $table->float('amount', 2);
         });
 
+        // Settlements
         Schema::create('settlements', function (Blueprint $table) {
             $table->id();
             $table->date('date');

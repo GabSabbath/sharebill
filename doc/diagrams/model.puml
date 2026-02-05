@@ -5,13 +5,16 @@ skinparam monochrome reverse
 class Category {
     - name 
     - type : 'need' | 'want' | 'investment'
+    - color: hexcode
 }
 
 class Home {
     - uuid
 }
 
-class User 
+class User {
+    - color: hexcode
+}
 
 abstract class Transaction {
     - isSettled() : boolean
