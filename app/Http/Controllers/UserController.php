@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Gate;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -13,8 +15,14 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return Inertia::render('UserHome');
+        $canEditUser = Gate::allows('update', $user);
+        Log::info("User ".$user->id." can update ".$user->id." :".$canEditUser);
+        return Inertia::render('UserHome', [
+            'user'=> $user,
+            'canEditUser' => $canEditUser,
+        ]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -22,6 +30,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         //
+        dd('yay!', $user);
     }
 
     /**
