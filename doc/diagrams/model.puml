@@ -1,0 +1,54 @@
+@startuml
+!theme mono
+skinparam monochrome reverse
+
+class Category {
+    - name 
+    - type : 'need' | 'want' | 'investment'
+    - color: hexcode
+}
+
+class Home {
+    - uuid
+}
+
+class User {
+    - color: hexcode
+}
+
+abstract class Transaction {
+    - isSettled() : boolean
+    - date : DateTime
+    - name : string
+    - comment : string
+    - getAmount()
+}
+
+note right of Transaction::getAmount {
+    - negative value means money going out of the payer's account
+    - positive value means money comming in to the payer's account
+}
+
+class SimpleTransaction extends Transaction {
+    - isSettled() : boolean 
+    - originalAmount : number
+    - amount : number
+}
+
+class SplitTransaction extends Transaction { 
+    - override isSettled() : boolean 
+    - amount : number
+}
+
+class Settlement {
+    date : DateTime
+}
+
+Transaction "*" --> "1" User
+Transaction "1" --> "1" Category
+User "*" --> "1" Home
+Category "*" --> "1" Home
+SplitTransaction "*" --> "1" SimpleTransaction : balances
+SplitTransaction "*" --> "1" Settlement
+
+@enduml

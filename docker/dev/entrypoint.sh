@@ -3,7 +3,7 @@ set -e
 
 composer install
 php artisan key:generate
-php artisan migrate --force
+#php artisan migrate --force
 npm cache clean --force
 npm install 
 npm run dev &
