@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignIdFor(Home::class)->nullable();
             $table->softDeletes();
 
-            $table->text('color')->comment('in hexcode, including the #');
+            $table->text('color')->comment('in hexcode, including the #')->nullable();
         });
 
         // Categories
