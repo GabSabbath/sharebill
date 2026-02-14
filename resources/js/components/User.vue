@@ -8,7 +8,9 @@
             </button>
         </div>
         <div>
-            <text class="bg-red-900">{{ form.errors.name }}</text>
+            <text v-if="form.hasErrors" class="bg-red-900">{{
+                form.errors.name
+            }}</text>
             <input v-if="isEditting" name="name" v-model="form.name" />
             <text v-else>{{ form.name }}</text>
         </div>
