@@ -16,3 +16,4 @@ Route::get('dashboard', function () {
 
 require __DIR__.'/settings.php';
 require __DIR__.'/userRoutes.php';
+require __DIR__.'/authRoutes.php';
