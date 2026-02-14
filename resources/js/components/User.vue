@@ -1,12 +1,8 @@
 <template>
-    <Form class="bg-green-950" :action="`/users/${user.id}`" method="patch">
+    <Form class="section-box" :action="`/users/${user.id}`" method="patch">
         {{ form.errors }}
         <div>
-            <button
-                v-if="canEdit"
-                class="rounded-xl bg-blue-900 p-1 text-[1vh] hover:bg-blue-700"
-                @click="() => (isEditting = !isEditting)"
-            >
+            <button v-if="canEdit" @click="() => (isEditting = !isEditting)">
                 {{ isEditting ? 'Stop editting' : '️Edit' }}
                 <text v-if="form.isDirty">...</text>
             </button>
