@@ -11,7 +11,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // TODO
+        // Done through policy
         return true;
     }
 

@@ -41,7 +41,7 @@ const userModel = ref(JSON.parse(JSON.stringify(user)));
 console.log(userModel);
 
 const update = useDebounceFn(() => {
-    form.post(`/users/${user.id}`);
+    form.patch(`/users/${user.id}`);
 }, 1000);
 
 watch(
