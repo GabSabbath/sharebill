@@ -16,21 +16,20 @@ class UserController extends Controller
     public function show(User $user)
     {
         $canEditUser = Gate::allows('update', $user);
-        Log::info("User ".$user->id." can update ".$user->id." :".$canEditUser);
+        Log::info('User '.$user->id.' can update '.$user->id.' :'.$canEditUser);
+
         return Inertia::render('UserHome', [
-            'user'=> $user,
+            'user' => $user,
             'canEditUser' => $canEditUser,
         ]);
     }
-
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        //
-        dd('yay!', $user);
+        $user->update($request->validated());
     }
 
     /**

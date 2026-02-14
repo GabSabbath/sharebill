@@ -8,7 +8,7 @@ echo "🧼 Running prettier"
 docker compose exec -T php npx pretty-quick --staged
 
 echo "👀 running eslint"
-docker compose exec -T php npx eslint .
+docker compose exec -T php npx eslint . --fix
 
 echo "👀 running laravel pint"
 phpFiles=$(git diff --cached --name-only --diff-filter=ACM -- '*.php');

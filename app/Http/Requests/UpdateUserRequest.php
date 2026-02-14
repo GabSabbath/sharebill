@@ -11,7 +11,8 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // TODO
+        return true;
     }
 
     /**
@@ -22,7 +23,7 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required'],
         ];
     }
 }

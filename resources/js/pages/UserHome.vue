@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import Home from '@/components/Home.vue';
 import User from '@/components/User.vue';
-import { User as UserType } from '@/types';
+import type { User as UserType } from '@/types';
 
 const { user, canEditUser } = defineProps<{
     user: UserType;
