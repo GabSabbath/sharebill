@@ -7,18 +7,32 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
-    --font-sans:
-        Instrument Sans, ui-sans-serif, system-ui, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+@font-face {
+    font-family: 'April';
+    src: url('/fonts/April.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 
+@font-face {
+    font-family: 'TrashHand';
+    src: url('/fonts/TrashHand.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@theme inline {
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);
 
     --color-background: var(--background);
+    --color-background2: var(--background2);
     --color-foreground: var(--foreground);
+    --color-foreground2: var(--foreground2);
+    --color-main: var(--main);
 
     --color-card: var(--card);
     --color-card-foreground: var(--card-foreground);
@@ -91,7 +105,13 @@
 
 :root {
     --background: hsl(0 0% 100%);
+    --background2: hsla(0, 0%, 100%, 0.3);
     --foreground: hsl(0 0% 3.9%);
+    --foreground2: hsla(0, 0%, 100%, 0.826);
+    --foreground3: hsla(0, 0%, 100%, 0.568);
+
+    --main: hsl(157, 100%, 50%);
+
     --card: hsl(0 0% 100%);
     --card-foreground: hsl(0 0% 3.9%);
     --popover: hsl(0 0% 100%);
@@ -124,6 +144,18 @@
     --sidebar-border: hsl(0 0% 91%);
     --sidebar-ring: hsl(217.2 91.2% 59.8%);
     --sidebar: hsl(0 0% 98%);
+
+    --font-normal: 'April';
+    --font-title: 'TrashHand';
+
+    --padding-md: 0.4vh;
+    --padding-sm: 0.2vh;
+    --padding-xs: 0.05vh;
+
+    --line-md: 0.2vh;
+    --line-sm: 0.2vh;
+
+    --squigly-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
 }
 
 .dark {
@@ -165,8 +197,60 @@
 @layer base {
     * {
         @apply border-border outline-ring/50;
+        color: var(--color-foreground);
+        font-family: var(--font-normal);
     }
     body {
-        @apply bg-background text-foreground;
+        border-color: var(--color-foreground);
+        font-family:
+            'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+            'Lucida Sans', Arial, sans-serif;
     }
+}
+
+button {
+    background-color: #ffffff00;
+    padding: var(--padding-md);
+    border-style: solid;
+    border-width: var(--line-md);
+    border-color: var(--color-foreground2);
+    border-radius: var(--squigly-radius);
+    margin: var(--padding-md);
+}
+button:hover {
+    background-color: var(--color-background2);
+}
+
+input,
+text {
+    padding: var(--padding-md);
+    margin: var(--padding-md);
+    user-select: col;
+}
+
+input {
+    border-style: dashed;
+    border-width: var(--line-sm);
+    border-color: var(--color-foreground2);
+    border-radius: var(--squigly-radius);
+}
+input:focus {
+    border-style: solid;
+    outline: none;
+}
+
+.section-box {
+    border-width: var(--line-sm);
+    border-color: var(--color-foreground3);
+    border-radius: var(--squigly-radius);
+}
+
+* {
+    padding: var(--padding-xs);
+    margin: var(--padding-xs);
+}
+
+::selection {
+    color: var(--color-main);
+    background-color: var(--color-background2);
 }
