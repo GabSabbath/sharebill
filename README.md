@@ -1,3 +1,10 @@
+# What's this?
+
+![Bill](public/Bill-squigly.svg)
+An open-source website to manage your finances with a partner. Share your bills
+with Bill and he'll help you out. Well, not yet. This project is far from a
+usable stage and is only in its development debut. More to come later.
+
 # Tech Stack & Tools
 
 - Vuejs (frontend)
