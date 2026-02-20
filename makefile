@@ -16,6 +16,8 @@ install-composer: ## composer install
 	docker compose run --rm php composer install
 
 destroy: ## Destroy and purge all dev environment 
+	rm -rf bootstrap/cache/*.php
+	docker compose exec php composer dump-autoload
 	docker compose -f docker-compose.dev.yml down --rmi all --volumes
 	rm .env 
 	rm -rf node_modules

@@ -10,7 +10,8 @@ fi
 source .env
 docker compose build 
 docker compose up -d --remove-orphans --quiet-pull
-#docker compose exec -T php composer install
+docker compose exec -T php composer install
+docker compose exec php composer dump-autoload
 #docker compose exec -T php php artisan key:generate
 docker compose exec -T php php artisan migrate --force
 #docker compose exec -T php npm cache clean --force
