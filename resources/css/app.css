@@ -233,6 +233,8 @@ input {
     border-width: var(--line-sm);
     border-color: var(--color-foreground2);
     border-radius: var(--squigly-radius);
+    padding: 1vh;
+    width: 25vw;
 }
 input:focus {
     border-style: solid;
@@ -248,6 +250,7 @@ input:focus {
 * {
     padding: var(--padding-xs);
     margin: var(--padding-xs);
+    font-size: x-large;
 }
 
 ::selection {
